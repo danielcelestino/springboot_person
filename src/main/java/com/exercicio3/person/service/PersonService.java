@@ -12,6 +12,7 @@ import com.exercicio3.person.model.Person;
 public class PersonService {
 	
 	private final AtomicLong counter = new AtomicLong();
+	private static Person personMock = new Person();
 	
 	public Person findById(String id) {
 		Person person = mockPerson(counter.incrementAndGet());
@@ -34,6 +35,18 @@ public class PersonService {
 	
 	private Person mockPerson(long index) {
 		return new Person(index, "Name - "+ index, "Last Name - "+ index, "Address - "+ index, "Gender - "+ index);
+	}
+
+	public Person createOrUpdateMock(Person person) {
+		personMock.setFirstName(person.getFirstName());
+		personMock.setLastName(person.getLastName());
+		personMock.setAddress(person.getAddress());
+		personMock.setGender(person.getGender());
+		personMock.setId(counter.incrementAndGet());
+		return personMock;
+	}
+
+	public void delete(String id) {
 	}
 	
 
